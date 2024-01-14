@@ -1,0 +1,98 @@
+algorithm cards
+
+type
+hand=array_of_integer[14]
+var
+TAB : hand
+x: integer
+
+
+PROCEDURE swap(VAR xp, VAR yp : INTEGER)
+VAR
+   tmp : INTEGER;
+BEGIN
+  tmp := xp;
+  xp := yp;
+  yp := tmp;
+END
+/* *** Bubble sort *** */
+PROCEDURE bubble_sort(VAR tab : ARRAY_OF INTEGER)
+VAR
+   i,j,n : INTEGER;
+BEGIN
+   n := tab.length;
+   FOR i FROM 0 TO n- 1  DO
+       FOR j  FROM 0 TO n-i-1 STEP 1  DO
+           IF (tab[j] > tab[j+1]) THEN
+               swap(tab[j], tab[j+1])
+           END_IF
+       END_FOR
+   END_FOR
+END
+
+
+
+FUNCTION binary_search(arr : hand , x: integer) : INTEGER
+VAR
+   left, right, mid : INTEGER;
+BEGIN
+   left := 0;
+   right := arr.length-1;
+   WHILE (left < right) DO
+       mid := left + (right - left)/2;
+       // check if x is present in the mid
+       IF (arr[mid] = x) THEN
+           RETURN mid;
+       END_IF
+       // if x grater, ignore the left half
+       IF (arr[mid] < x) THEN
+           left := mid+1;
+       ELSE
+       // if x is smaller, ignore the right half
+       right := mid-1;
+       END_IF
+   END_WHILE
+   // if we reached here then the element is not present
+   RETURN -1  ;
+END
+
+PROCEDURE insert(tab:hand,x:integer)
+
+var
+ i , j= 0
+
+while (i<length(tab) && tab[i]<x) do 
+ i=i+1 
+end while
+    
+  for j=length(tab)-1 to i+1 step -1 do
+tab[j]=tab[j-1]
+end for
+    
+   tab[i]=x
+end insert
+    
+   
+
+
+
+
+begin 
+
+bubble_sort( hand )
+
+while ( x<0 && x>10) do 
+  writeln ('pick a card that has a value between 1 and 10')
+  read(x)
+
+end while
+
+search=binary_search(hand , x)
+
+insert(x,search)
+
+end
+
+
+
+
